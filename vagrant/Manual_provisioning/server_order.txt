@@ -1,0 +1,6 @@
+database01
+rabbitmq01
+memcached01
+application01
+website01
+
