@@ -1,0 +1,42 @@
+Vagrant.configure("2") do |config|
+  config.hostmanager.enabled = true 
+  config.hostmanager.manage_host = true
+  
+### DB vm  ####
+  config.vm.define "database01" do |database01|
+    database01.vm.box = "geerlingguy/centos7"
+    database01.vm.hostname = "database01"
+    database01.vm.network "private_network", ip: "192.168.56.50"
+  end
+  
+### Memcache vm  #### 
+  config.vm.define "memcached01" do |memcached01|
+    memcached01.vm.box = "geerlingguy/centos7"
+    memcached01.vm.hostname = "memcached01"
+    memcached01.vm.network "private_network", ip: "192.168.56.51"
+  end
+  
+### RabbitMQ vm  ####
+  config.vm.define "rabbitmq01" do |rabbitmq01|
+    rabbitmq01.vm.box = "geerlingguy/centos7"
+    rabbitmq01.vm.hostname = "rabbitmq01"
+    rabbitmq01.vm.network "private_network", ip: "192.168.56.52"
+  end
+  
+### tomcat vm ###
+   config.vm.define "application01" do |application01|
+    application01.vm.box = "geerlingguy/centos7"
+    application01.vm.hostname = "application01"
+    application01.vm.network "private_network", ip: "192.168.56.53"  
+    application01.vm.provider "virtualbox" do |vb|
+     vb.memory = "1024"
+   end
+   end
+   
+### Nginx VM ###
+  config.vm.define "website01" do |website01|
+    website01.vm.box = "ubuntu/xenial64"
+    website01.vm.hostname = "website01"
+  website01.vm.network "private_network", ip: "192.168.56.54" 
+end
+end
